@@ -1,0 +1,6 @@
+@Beacon.API_HostAddress = http://localhost:5047
+
+GET {{Beacon.API_HostAddress}}/users/
+Accept: application/json
+
+###
