@@ -23,7 +23,6 @@ namespace Beacon.AppHost.Lifecycle.NodeApp
                                 var serviceName = multiBindings ? $"{app.Name}_{binding.Name}" : app.Name;
                                 env[$"PORT_{binding.Name.ToUpperInvariant()}"] = $"{{{{- portForServing \"{serviceName}\" -}}}}";
                             }
-
                         }
                         else
                         {

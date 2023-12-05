@@ -1,57 +1,60 @@
-import logo from "./logo.svg"
-import { Counter } from "./features/counter/Counter"
-import "./App.css"
+import { FC } from "react"
+import ConnectionHub from "./features/beacon/hub/ConnectionHub"
+import { useAppSelector } from "./app/hooks";
+import { selectCurrentUserName } from "./features/beacon/RoomSlice";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
-  )
+import "./App.scss"
+import { selectOnlineUsers } from "./features/beacon/ConnectionSlice";
+
+const App: FC = () => {
+    const userName = useAppSelector(selectCurrentUserName);
+    const onlineUsers = useAppSelector(selectOnlineUsers);
+
+    return (
+        <div className="App">
+            <header>
+                <div>
+                    <span>SignalR Audio Caller</span>
+                    <div>
+                        <span>
+                            You are <span>{userName}</span>
+                        </span>
+                    </div>
+                </div>
+            </header>
+            <ConnectionHub>
+                <div>
+                    <div>
+                        <div>
+                            <div>Idle</div>
+                            <button>Hang Up</button>
+                        </div>
+                        <div>
+                            <span>Online Users: <small>{onlineUsers.length}</small></span>
+                            <ul>
+                                {onlineUsers.map(({ name, inCall }) => (
+                                    <li>
+                                        <a href="#">
+                                            <div>{name}</div>
+                                            <div>{inCall ? 'Busy' : 'Available'}</div>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div>
+                                <h4>Partner</h4>
+                                <audio className="audio partner"></audio>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ConnectionHub>
+        </div>
+    )
 }
 
 export default App
