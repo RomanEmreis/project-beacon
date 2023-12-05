@@ -21,7 +21,7 @@ namespace Beacon.AppHost.Extensions
         }
 
         public static IResourceBuilder<NodeAppResource> AddNpmApp(this IDistributedApplicationBuilder builder, string name, string workingDirectory, string scriptName = "start")
-            => builder.AddNodeApp(name, "npm", workingDirectory, ["start", scriptName]);
+            => builder.AddNodeApp(name, "npm", workingDirectory, ["run", scriptName]);
     }
 
     internal class NodeAppResource(string name, string command, string workingDirectory, string[]? args)

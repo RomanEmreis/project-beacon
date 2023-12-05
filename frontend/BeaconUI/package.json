@@ -14,7 +14,9 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@microsoft/signalr": "^8.0.0",
     "@reduxjs/toolkit": "^1.8.1",
+    "@types/node": "^20.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.1"
@@ -32,8 +34,8 @@
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "jsdom": "^21.1.0",
-    "prettier": "^2.7.1",
     "prettier-config-nick": "^1.0.2",
+    "sass": "^1.69.5",
     "typescript": "^5.0.2",
     "vite": "^4.0.0",
     "vitest": "^0.30.1"
@@ -47,7 +49,12 @@
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "off"
+        }
+      ],
       "react/jsx-no-target-blank": "off"
     }
   },
